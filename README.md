@@ -8,7 +8,7 @@
  CoinShift
 </h1>
 
-This project is a client side application using SideShift.ai APIs built for Software Engineer Application purpose. The features of this application is not completed. If you want to do an easy swap please use [SideShift.ai](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql) instead.
+This project is a client side application using SideShift.ai APIs built for Software Engineer Application purpose. The features of this application is not completed. The live version of the application can be seen at [https://coinshift.auliavafif.com](https://coinshift.auliavafif.com). If you want to do an easy swap please use [SideShift.ai](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql) instead.
 
 
 ## 🚀 Quick start
