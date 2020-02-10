@@ -1,27 +1,22 @@
 import React, { useEffect } from 'react'
-import SwapCard from '../components/transfer/swap-card'
-import RecentDeposits from '../components/transfer/recent-deposits'
-import VolumeStats from '../components/transfer/volume-stats'
+import OrderCard from '../components/order/order-card'
 import Layout from '../components/common/layout'
 import { css } from '@emotion/core'
 import SEO from '../components/common/seo'
 import { transferActions } from '../state/ducks/transfer'
+import { orderActions } from '../state/ducks/order'
 import { authActions } from '../state/ducks/auth'
-import { commonActions } from '../state/ducks/common'
-import { Link } from 'gatsby'
 
 import { connect } from 'react-redux'
 
-const Index = ({
+const Order = ({
   fetchMethodsWatcher,
   initializeSessionWatcher,
   location,
   fetchRateWatcher,
-  updateFetchRateStatus,
-  fetchRecentDepositsWatcher,
-  recentDeposits
+  fetchOrderWatcher
 }) => {
-  const exchangeData = location.search
+  const orderId = location.search
     ? JSON.parse(
         '{"' +
           decodeURI(location.search.substring(1))
@@ -29,29 +24,28 @@ const Index = ({
             .replace(/&/g, '","')
             .replace(/=/g, '":"') +
           '"}'
-      )
+      ).id
     : null
 
   useEffect(() => {
     fetchMethodsWatcher()
     initializeSessionWatcher()
     return () => {
+      fetchOrderWatcher()
       fetchRateWatcher()
     }
   }, [])
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Order" />
       <div
         css={css`
-          margin: 30px auto;
+          margin: 0 auto;
           max-width: 600px;
         `}
       >
-        <SwapCard exchangeData={exchangeData} />
-        <RecentDeposits></RecentDeposits>
-        <VolumeStats></VolumeStats>
+        <OrderCard orderId={orderId} />
       </div>
     </Layout>
   )
@@ -59,10 +53,8 @@ const Index = ({
 
 const mapStateToProps = state => {
   return {
-    depositMethods: state.transfer.depositMethods,
-    settleMethods: state.transfer.settleMethods,
+    transfer: state.transfer,
     auth: state.auth,
-    isLoading: state.common?.isLoading,
   }
 }
 
@@ -71,10 +63,10 @@ const mapDispatchToProps = dispatch => {
     fetchMethodsWatcher: () => dispatch(transferActions.fetchMethodsWatcher()),
     initializeSessionWatcher: () =>
       dispatch(authActions.initializeSessionWatcher()),
+    fetchOrderWatcher: () => dispatch(orderActions.fetchOrderWatcher()),
     fetchRateWatcher: () => dispatch(transferActions.fetchRateWatcher()),
-    updateFetchRateStatus: status =>
-      dispatch(commonActions.updateFetchRateStatus(status)),
+
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(mapStateToProps, mapDispatchToProps)(Order)
