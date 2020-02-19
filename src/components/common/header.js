@@ -61,7 +61,7 @@ const Header = ({ siteTitle }) => (
             line-height: 0.7rem;
           `}
         >
-          V0.5
+          Alpha
         </span>
       </div>
     </div>

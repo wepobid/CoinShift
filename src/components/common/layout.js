@@ -107,7 +107,7 @@ const Layout = ({ children, isLoading }) => {
               APIs
             </div>
             <div>
-              (For{' '}
+              {/* (For{' '}
               <a
                 css={css`
                   color: white;
@@ -116,7 +116,8 @@ const Layout = ({ children, isLoading }) => {
               >
                 Software Enggineer Application
               </a>{' '}
-              Purpose Only)
+              Purpose Only) */}
+              This project is in Alpha. Please tread carefully!
             </div>
           </div>
         </div>
